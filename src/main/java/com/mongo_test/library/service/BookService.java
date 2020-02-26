@@ -42,7 +42,7 @@ public class BookService {
         return new BookDTO(book.orElseThrow(()-> new RuntimeException("Livro não encontrado!")));
     }
 
-    public void createBook(CreateBookDTO bookDTO){
+    public Book createBook(CreateBookDTO bookDTO){
         Book newBook = new Book(bookDTO.getName(), bookDTO.getEdition(), bookDTO.getPublicationYear());
         Book bookSaved = bookRepository.save(newBook);
         for(int c = 0; c < bookDTO.getAuthorsId().size(); c++ ){
@@ -51,7 +51,7 @@ public class BookService {
             authorRepository.save(author);
             bookSaved.getAuthors().add(new AuthorDTOSemBooks(author));
         }
-        bookRepository.save(bookSaved);
+        return bookRepository.save(bookSaved);
     }
 
     public BookDTO updateBook(Book book, String id) {

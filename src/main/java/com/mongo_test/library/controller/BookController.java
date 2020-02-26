@@ -28,8 +28,8 @@ public class BookController {
     }
 
     @PostMapping
-    public void createBook(@RequestBody CreateBookDTO book){
-        bookService.createBook(book);
+    public Book createBook(@RequestBody CreateBookDTO book){
+       return bookService.createBook(book);
     }
 
     @PutMapping(value = "/{id}")
